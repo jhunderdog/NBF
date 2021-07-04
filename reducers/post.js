@@ -39,7 +39,7 @@ export const addPost = {
 
 const dummyPost = {
   id: 2,
-  user: {
+  User: {
     id: 1,
     nickname: "제로초",
   },

@@ -9,14 +9,14 @@ const PostForm = () => {
   const [text, setText] = useState("");
   const onSubmit = useCallback(() => {
     dispatch(addPost);
+    setText("");
   }, []);
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, [imageInput.current]);
   const onChangeText = useCallback((e) => {
     setText(e.target.value);
-    setText("");
-  });
+  }, []);
   return (
     <Form
       style={{ margin: "10px 0 20px" }}
