@@ -11,6 +11,12 @@ export const initialState = {
         {
           src: "https://m.londonslacks.com/web/product/big/201907/ece0ec037ccc8d580daaa51701b90b7a.jpg",
         },
+        {
+          src: "https://m.londonslacks.com/web/product/big/201907/ece0ec037ccc8d580daaa51701b90b7a.jpg",
+        },
+        // {
+        //   src: "https://m.londonslacks.com/web/product/big/201907/ece0ec037ccc8d580daaa51701b90b7a.jpg",
+        // },
       ],
       Comments: [
         {
