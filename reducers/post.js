@@ -59,6 +59,7 @@ export const addComment = (data) => ({
 
 const dummyPost = {
   id: 2,
+  content: "1",
   User: {
     id: 1,
     nickname: "제로초",
