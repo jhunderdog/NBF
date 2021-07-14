@@ -22,6 +22,7 @@ function* addPost(action) {
     // const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
+      data: action.data,
       //   data: result.data,
     });
   } catch (err) {
@@ -38,7 +39,7 @@ function* addComment(action) {
     // const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_COMMENT_SUCCESS,
-      //   data: result.data,
+      data: action.data,
     });
   } catch (err) {
     yield put({
