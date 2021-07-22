@@ -142,5 +142,5 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 export default function* userSaga() {
-  yield all([fork(watchFollow), fork(watchUnfollow), fork(watchLogIn), fork(watchLogOut)]);
+  yield all([fork(watchFollow), fork(watchUnfollow), fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)]);
 }
