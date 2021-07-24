@@ -78,7 +78,7 @@ function* logIn(action) {
     yield delay(1000);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
       //   data: result.data,
     });
   } catch (err) {
