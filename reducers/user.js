@@ -10,8 +10,8 @@ export const initialState = {
   unfollowError: null,
 
   logInLoading: false,
-  LogInDone: false,
-  LogInError: null,
+  logInDone: false,
+  logInError: null,
   logOutLoading: false,
   logOutDone: false,
   logOutError: null,
@@ -140,14 +140,14 @@ const reducer = (state = initialState, action) => {
 
       case LOG_IN_REQUEST:
         draft.logInLoading = true;
-        draft.LogInError = null;
-        draft.LogInDone = false;
+        draft.logInError = null;
+        draft.logInDone = false;
         break;
 
       case LOG_IN_SUCCESS:
         draft.logInLoading = false;
-        draft.LogInDone = true;
-        draft.me = dummyUser(action.data);
+        draft.logInDone = true;
+        draft.me = action.data;
         break;
 
       case LOG_IN_FAILURE:
