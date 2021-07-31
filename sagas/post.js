@@ -8,7 +8,6 @@ import {
   throttle,
 } from "redux-saga/effects";
 import axios from "axios";
-import shortId from "shortid";
 import {
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
@@ -22,21 +21,20 @@ import {
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_FAILURE,
-  generateDummyPost,
 } from "../reducers/post";
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
 
 function loadPostsAPI(data) {
-  return axios.get("/api/post", data);
+  return axios.get("/posts", data);
 }
 
 function* loadPosts(action) {
   try {
-    yield delay(1000);
-    // const result = yield call(addPostAPI, action.data);
+    // yield delay(1000);
+    const result = yield call(loadPostsAPI, action.data);
     yield put({
       type: LOAD_POSTS_SUCCESS,
-      data: generateDummyPost(10),
+      data: result.data,
       //   data: result.data,
     });
   } catch (err) {
@@ -113,6 +111,7 @@ function* addComment(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: ADD_COMMENT_FAILURE,
       data: err.response.data,
