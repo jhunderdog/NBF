@@ -80,22 +80,22 @@ export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
 
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
-const dummyUser = (data) => ({
-  ...data,
-  nickname: "제로초",
-  id: 1,
-  Posts: [{ id: 1 }],
-  Followings: [
-    { nickname: "부기초" },
-    { nickname: "Chanho Lee" },
-    { nickname: "neue zeal" },
-  ],
-  Followers: [
-    { nickname: "부기초" },
-    { nickname: "Chanho Lee" },
-    { nickname: "neue zeal" },
-  ],
-});
+// const dummyUser = (data) => ({
+//   ...data,
+//   nickname: "제로초",
+//   id: 1,
+//   Posts: [{ id: 1 }],
+//   Followings: [
+//     { nickname: "부기초" },
+//     { nickname: "Chanho Lee" },
+//     { nickname: "neue zeal" },
+//   ],
+//   Followers: [
+//     { nickname: "부기초" },
+//     { nickname: "Chanho Lee" },
+//     { nickname: "neue zeal" },
+//   ],
+// });
 export const loginRequestAction = (data) => {
   return {
     type: LOG_IN_REQUEST,
@@ -235,6 +235,7 @@ const reducer = (state = initialState, action) => {
         break;
 
       case CHANGE_NICKNAME_SUCCESS:
+        draft.me.nickname = action.data.nickname;
         draft.changeNicknameLoading = false;
         draft.changeNicknameDone = true;
         break;
