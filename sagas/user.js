@@ -46,7 +46,9 @@ function logOutAPI() {
 }
 
 function signUpAPI(data) {
+  console.log("send api");
   return axios.post("/user", data);
+  
 }
 
 
@@ -225,7 +227,7 @@ function* logOut() {
 
 function* signUp(action) {
   try {
-    yield delay(1000);
+  
     const result = yield call(signUpAPI, action.data);
     console.log(result);
     yield put({
