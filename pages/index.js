@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import AppLayout from "../components/AppLayout";
 import { useDispatch, useSelector } from "react-redux";
+import { END } from 'redux-saga';
 import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
 import { LOAD_POSTS_REQUEST } from "../reducers/post";
 import { LOAD_USER_REQUEST } from "../reducers/user";
+import wrapper from "../store/configureStore";
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
@@ -19,14 +21,6 @@ const Home = () => {
     }
   }, [retweetError]);
 
-  useEffect(() => {
-    dispatch({
-      type: LOAD_USER_REQUEST,
-    })
-    dispatch({
-      type: LOAD_POSTS_REQUEST,
-    });
-  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -59,6 +53,17 @@ const Home = () => {
   );
 };
 
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({req, res, ...etc}) => {
+  console.log(store);
+  store.dispatch({
+    type: LOAD_USER_REQUEST,
+  });
+  store.dispatch({
+    type: LOAD_POSTS_REQUEST,
+  });
+  store.dispatch(END);
+  await store.sagaTask.toPromise();
+});
 export default Home;
 
 //코드스플리팅
