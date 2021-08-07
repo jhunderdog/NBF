@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import AppLayout from "../components/AppLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from 'redux-saga';
+import axios from 'axios';
 import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import { LOAD_POSTS_REQUEST } from "../reducers/post";
-import { LOAD_USER_REQUEST } from "../reducers/user";
 import wrapper from "../store/configureStore";
+
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
@@ -53,17 +55,40 @@ const Home = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({req, res, ...etc}) => {
-  console.log(store);
-  store.dispatch({
-    type: LOAD_USER_REQUEST,
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  context.store.dispatch({
+    type: LOAD_MY_INFO_REQUEST,
   });
-  store.dispatch({
+  context.store.dispatch({
     type: LOAD_POSTS_REQUEST,
   });
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
+  context.store.dispatch(END);
+  await context.store.sagaTask.toPromise();
 });
 export default Home;
 
 //코드스플리팅
+
+// export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+//   console.log('getServerSideProps start');
+//   console.log(context.req.headers);
+//   const cookie = context.req ? context.req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (context.req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+//   context.store.dispatch({
+//     type: LOAD_MY_INFO_REQUEST,
+//   });
+//   context.store.dispatch({
+//     type: LOAD_POSTS_REQUEST,
+//   });
+//   context.store.dispatch(END);
+//   console.log('getServerSideProps end');
+//   await context.store.sagaTask.toPromise();
+// });
