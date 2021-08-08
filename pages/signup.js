@@ -6,6 +6,7 @@ import useInput from "../hooks/useInput";
 import styled from "styled-components";
 import { SIGN_UP_REQUEST } from "../reducers/user";
 import { useDispatch, useSelector } from "react-redux";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import Router from 'next/router';
 import axios from "axios";
 import wrapper from "../store/configureStore";
