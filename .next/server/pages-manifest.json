@@ -2,6 +2,9 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
+  "/": "pages/index.js",
+  "/signup": "pages/signup.js",
+  "/user/[id]": "pages/user/[id].js",
   "/profile": "pages/profile.js",
-  "/": "pages/index.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }

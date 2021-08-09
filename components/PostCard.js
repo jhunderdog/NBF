@@ -8,6 +8,7 @@ import {
   EllipsisOutlined,
   HeartTwoTone,
 } from "@ant-design/icons";
+import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import PostImages from "./Postimages";
 import CommentForm from "./CommentForm";
@@ -116,7 +117,9 @@ const PostCard = ({ post }) => {
         cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
         >
           <Card.Meta
-          avatar={<Avatar>{post.Retweet.User.nickname[0]}</Avatar>}
+          avatar={<Link href={`/user/${post.Retweet.User.id}`}>
+            <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
+            </Link>}
           title={post.Retweet.User.nickname}
           description={<PostCardContent postData={post.Retweet.content} />}
         />
@@ -125,7 +128,9 @@ const PostCard = ({ post }) => {
         ) 
         
         : (<Card.Meta
-          avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+          avatar={<Link href={`/user/${post.User.id}`}>
+            <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+            </Link>}
           title={post.User.nickname}
           description={<PostCardContent postData={post.content} />}
           />
@@ -143,7 +148,10 @@ const PostCard = ({ post }) => {
               <li>
                 <Comment
                   author={item.User.nickname}
-                  avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                  avatar={(<Link href={`/user/${item.User.id}`}>
+                    <a><Avatar>{item.User.nickname[0]}</Avatar></a>
+                    </Link>
+                    )}
                   content={item.content}
                 />
               </li>

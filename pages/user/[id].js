@@ -40,7 +40,7 @@ const User = () => {
 
     return (
         <AppLayout>
-            <Head>
+            {userInfo && (<Head>
                 <title>
                     {userInfo.nickname}
                     님의 글
@@ -50,7 +50,7 @@ const User = () => {
                 <meta name="og:description" content={`${userInfo.nickname}님의 게시글`}/>
                 <meta name="og:image" content='http://localhost:3060/favicon.ico'/>
                 <meta name="og:url" content={`https://nodebird.com/post/${id}`}/>
-            </Head>
+            </Head>)}
             {userInfo
             ? ( <Card
                 actions={[
@@ -106,6 +106,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     });
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
+    
 })
 
 export default User;
